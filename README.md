@@ -1,1 +1,1 @@
-# Watson Workshop - Disocvery + NLU
+# Watson Workshop
