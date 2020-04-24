@@ -1,0 +1,233 @@
+{
+  "intents": [
+    {
+      "intent": "Intituições",
+      "examples": [
+        {
+          "text": "O que é Contran?"
+        },
+        {
+          "text": "Para que serve o Detran?"
+        },
+        {
+          "text": "O que faz o ciretran?"
+        },
+        {
+          "text": "Quais as intituições de trânsitos existentes?"
+        },
+        {
+          "text": "Como o Detran funciona?"
+        }
+      ]
+    },
+    {
+      "intent": "Saudacao",
+      "examples": [
+        {
+          "text": "Oi"
+        },
+        {
+          "text": "Olá"
+        },
+        {
+          "text": "Bom dia"
+        },
+        {
+          "text": "Boa tarde"
+        },
+        {
+          "text": "Boa noite"
+        }
+      ]
+    },
+    {
+      "intent": "Multas",
+      "examples": [
+        {
+          "text": "Em que tipo de situação posso levar uma multa grave"
+        },
+        {
+          "text": "Quais as multas gravíssimas"
+        },
+        {
+          "text": "Qual a definição das multas leves"
+        },
+        {
+          "text": "O que define uma multa média"
+        },
+        {
+          "text": "Situações em que é possível ser penalizado com uma multa grave"
+        }
+      ]
+    },
+    {
+      "intent": "VelocidadeMaxima",
+      "examples": [
+        {
+          "text": "Máximo permitido"
+        },
+        {
+          "text": "Velociade permitida sem sinalização"
+        },
+        {
+          "text": "Quando não existe sinalização qual a velocidade máxima"
+        },
+        {
+          "text": "A velocidade máxima quando não sei qual é"
+        },
+        {
+          "text": "Qual a velocidade máxima permitida quando não há sinalização"
+        }
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Instituicao",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Ciretran",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Contran",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Detran",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "entity": "Multa",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "leve",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "gravíssima",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "média",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "grave",
+          "synonyms": []
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "webhooks": [
+    {
+      "url": "",
+      "name": "main_webhook",
+      "headers": []
+    }
+  ],
+  "dialog_nodes": [
+    {
+      "type": "folder",
+      "conditions": "#Intituições",
+      "dialog_node": "node_9_1583868702232",
+      "previous_sibling": "node_8_1587733452209"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_9_1583868702232",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "conditions": "#VelocidadeMaxima",
+      "dialog_node": "node_8_1587733452209",
+      "previous_sibling": "node_3_1583865462856"
+    },
+    {
+      "type": "standard",
+      "metadata": {
+        "_customization": {
+          "mcr": false
+        }
+      },
+      "conditions": "#Multas",
+      "dialog_node": "node_3_1583865462856",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome || #Saudacao",
+      "dialog_node": "Bem-vindo"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "Workshop",
+  "language": "pt-br",
+  "description": ""
+}
